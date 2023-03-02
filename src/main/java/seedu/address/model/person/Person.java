@@ -7,6 +7,15 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.fields.Address;
+import seedu.address.model.person.fields.CommunicationChannel;
+import seedu.address.model.person.fields.Email;
+import seedu.address.model.person.fields.Gender;
+import seedu.address.model.person.fields.Major;
+import seedu.address.model.person.fields.Modules;
+import seedu.address.model.person.fields.Name;
+import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Race;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,6 +28,11 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Gender gender;
+    private final Major major;
+    private final Modules modules;
+    private final Race race;
+    private final CommunicationChannel comms;
 
     // Data fields
     private final Address address;
@@ -29,14 +43,24 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Gender gender,
+                  Major major, Modules modules, Race race, Set<Tag> tags, CommunicationChannel comms) {
+        requireAllNonNull(name);
         this.name = name;
+
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+<<<<<<< HEAD
         this.isStarred = false;
+=======
+        this.gender = gender;
+        this.major = major;
+        this.modules = modules;
+        this.race = race;
+        this.comms = comms;
+>>>>>>> master
     }
 
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isStarred) {
@@ -142,7 +166,15 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Gender: ")
+                .append(this.getGender())
+                .append("; Major: ")
+                .append(this.getMajor())
+                .append("; Race: ")
+                .append(this.getRace())
+                .append("; Preferred Communication: ")
+                .append(this.getComms());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -152,4 +184,24 @@ public class Person {
         return builder.toString();
     }
 
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public Modules getModules() {
+        return modules;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public CommunicationChannel getComms() {
+        return comms;
+    }
 }
