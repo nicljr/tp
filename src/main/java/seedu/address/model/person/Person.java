@@ -24,6 +24,8 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final boolean isStarred;
+
     /**
      * Every field must be present and not null.
      */
@@ -34,7 +36,19 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isStarred = false;
     }
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isStarred) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isStarred = isStarred;
+    }
+
 
     public Name getName() {
         return name;
@@ -58,6 +72,18 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean getStarred() {
+        return isStarred;
+    }
+
+    public Person star() {
+        return new Person(name, phone, email, address, tags, true);
+    }
+
+    public Person unstar() {
+        return new Person(name, phone, email, address, tags, false);
     }
 
     /**
@@ -104,8 +130,14 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
+
+        builder.append(getName());
+
+        if (isStarred) {
+            builder.append("( Favourite )");
+        }
+
+        builder.append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())

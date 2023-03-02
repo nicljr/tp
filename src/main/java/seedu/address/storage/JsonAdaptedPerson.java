@@ -29,6 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String isStarred;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +37,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("isStarred") String isStarred) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +45,7 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.isStarred = isStarred;
     }
 
     /**
@@ -57,6 +59,12 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+
+        if (source.getStarred()) {
+            this.isStarred = "Starred";
+        } else {
+            this.isStarred = "Unstarred";
+        }
     }
 
     /**
@@ -103,7 +111,15 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        boolean modelStarred;
+        if (isStarred.equals("Starred")) {
+            modelStarred = true;
+        } else {
+            modelStarred = false;
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelStarred);
     }
 
 }
