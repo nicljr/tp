@@ -90,4 +90,11 @@ public abstract class Event {
                 && otherEvent.getEndDateTime().equals(getEndDateTime())
                 && otherEvent.getRecurrence().equals(getRecurrence());
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s (From: %s To: %s) %s",
+                description.getDescription(), startDateTime.toString(),
+                endDateTime.toString(), recurrence.toString());
+    }
 }
