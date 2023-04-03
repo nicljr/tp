@@ -245,8 +245,8 @@ Use this command to edit his/her details easily!
 _Here are some important requirements for you to take note:_
 
 * `INDEX` refers to the index of the contact you wish to edit in the current displayed list.
-  * `INDEX` must be a **positive integer**.
-* At least one field must be provided.
+  * `INDEX` must be a **positive integer** and be greater than 0.
+* All the fields are optional. However, at least one field must be provided.
 
 For the following fields, they are considered a `SuperField`.
 * Modules
@@ -263,7 +263,7 @@ When using edit, the command looks for each parameter in the `SuperField`:
   
 | Prefix | Name of Field                   | Optional? |
 |--------|---------------------------------|-----------|
-| n      | Name                            | No        |
+| n      | Name                            | Yes       |
 | e      | Email address                   | Yes       |
 | p      | Phone Number                    | Yes       |
 | a      | Address                         | Yes       |
