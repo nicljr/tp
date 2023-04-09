@@ -758,6 +758,13 @@ Use Dark mode!
 
 `dark`
 
+### To Note Section
+
+_Some pointers for you guys to take note:_
+
+* The Event Card in the Events Tab greys out when the current time and date is after the Events `END DATE & END TIME` however, 
+     it will only update existing events when a command is run within NeoBook. Newly Added/Edited Events with `END DATE & END TIME` that have past will be automatically greyed out.
+
 [Back To Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
